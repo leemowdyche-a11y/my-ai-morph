@@ -7,104 +7,93 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .hero-gradient { background: radial-gradient(circle at top right, #4f46e5, #000000); }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        textarea::placeholder { color: #334155; }
     </style>
 </head>
-<body class="bg-black text-white min-h-screen">
+<body class="min-h-screen">
 
-    <nav class="p-6 border-b border-white/10">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="text-2xl font-black tracking-tighter text-indigo-500">MORPH.AI</div>
-            <div class="text-xs uppercase tracking-widest text-gray-500 font-bold">Free AI Engine v2.0</div>
-        </div>
+    <nav class="p-6 border-b border-white/10 flex justify-between items-center max-w-6xl mx-auto">
+        <div class="text-2xl font-black tracking-tighter text-indigo-500">MORPH.AI</div>
+        <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full">Global v2.2 Live</div>
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-12">
-        <div class="w-full h-24 mb-10 bg-white/5 rounded-2xl flex items-center justify-center border border-dashed border-white/20">
-            <span class="text-gray-600 text-xs font-mono uppercase tracking-[0.2em] italic">[ Ad Placement: Paste Your Ad Code Here ]</span>
+        <div class="w-full min-h-[60px] mb-10 bg-white/5 rounded-2xl flex items-center justify-center border border-dashed border-white/10">
+            <span class="text-gray-700 text-[10px] uppercase font-mono tracking-[0.5em] italic">Advertisement Enabled</span>
         </div>
 
-        <section class="space-y-8">
-            <div class="text-center space-y-4">
-                <h2 class="text-4xl md:text-6xl font-black italic tracking-tight">TURN ANY CONTENT <br><span class="text-indigo-500">INTO VIRAL POSTS.</span></h2>
-                <p class="text-gray-400 text-sm md:text-base">Paste your raw ideas. Let AI do the magic for Global Platforms.</p>
-            </div>
-
-            <div class="glass p-2 rounded-3xl shadow-2xl">
-                <textarea id="userInput" class="w-full h-64 bg-transparent p-6 outline-none text-lg placeholder:text-gray-700 resize-none" placeholder="Drop your YouTube link text, blog draft, or random thoughts..."></textarea>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <button onclick="process('LinkedIn Business Post')" class="bg-white text-black font-black py-4 rounded-xl hover:bg-indigo-500 hover:text-white transition-all transform hover:scale-105">LINKEDIN</button>
-                <button onclick="process('Twitter/X Thread')" class="bg-white text-black font-black py-4 rounded-xl hover:bg-indigo-500 hover:text-white transition-all transform hover:scale-105">X THREAD</button>
-                <button onclick="process('TikTok/Reels Script')" class="bg-white text-black font-black py-4 rounded-xl hover:bg-indigo-500 hover:text-white transition-all transform hover:scale-105">VIDEO SCRIPT</button>
-                <button onclick="process('SEO Blog Article')" class="bg-white text-black font-black py-4 rounded-xl hover:bg-indigo-500 hover:text-white transition-all transform hover:scale-105">SEO BLOG</button>
-            </div>
+        <section class="text-center mb-12">
+            <h1 class="text-5xl md:text-7xl font-black italic mb-6 tracking-tight uppercase">
+                Content <span class="text-indigo-500">Morphing</span>
+            </h1>
+            <p class="text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
+                Repurpose any text into high-engagement social posts in seconds. 
+                Powered by Llama 3.3. No login, no credits.
+            </p>
         </section>
 
-        <div id="loader" class="hidden mt-20 text-center">
-            <div class="inline-block w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-            <p class="mt-4 font-mono text-indigo-400 uppercase tracking-widest text-sm">Processing Meta-Data...</p>
+        <div class="glass p-2 rounded-[2rem] shadow-2xl mb-8">
+            <textarea id="userInput" 
+                class="w-full h-64 bg-transparent p-6 outline-none text-lg text-gray-200 resize-none transition-all" 
+                placeholder="Paste your YouTube transcript, article, or raw thoughts here..."></textarea>
         </div>
 
-        <div id="result" class="hidden mt-12 space-y-6">
-            <div class="glass p-8 rounded-3xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 p-4">
-                    <button onclick="copyContent()" class="text-xs font-bold uppercase tracking-widest bg-indigo-600 px-3 py-1 rounded hover:bg-indigo-500">Copy</button>
-                </div>
-                <div id="outputArea" class="text-gray-300 leading-relaxed whitespace-pre-wrap font-medium"></div>
-            </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
+            <button onclick="process('LinkedIn Post')" class="bg-white text-black font-black py-4 rounded-xl hover:bg-indigo-600 hover:text-white transition-all active:scale-95">LINKEDIN</button>
+            <button onclick="process('X Thread')" class="bg-white text-black font-black py-4 rounded-xl hover:bg-indigo-600 hover:text-white transition-all active:scale-95">X THREAD</button>
+            <button onclick="process('TikTok Script')" class="bg-white text-black font-black py-4 rounded-xl hover:bg-indigo-600 hover:text-white transition-all active:scale-95">TIKTOK</button>
+            <button onclick="process('SEO Article')" class="bg-white text-black font-black py-4 rounded-xl hover:bg-indigo-600 hover:text-white transition-all active:scale-95">SEO BLOG</button>
+        </div>
 
-            <div class="p-6 bg-indigo-900/20 rounded-2xl border border-indigo-500/30 text-center">
-                <p class="text-xs text-indigo-300 font-bold uppercase tracking-widest">Support the Tool</p>
-                <p class="text-sm text-gray-400 mt-1">Found this helpful? Share it with your team!</p>
+        <div id="loader" class="hidden py-12 text-center">
+            <div class="inline-block w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-4 text-xs font-mono text-indigo-400 animate-pulse tracking-widest uppercase">Processing AI Data...</p>
+        </div>
+
+        <div id="result" class="hidden space-y-6 animate-in fade-in duration-700">
+            <div class="glass p-8 rounded-[2rem] relative border-t-4 border-indigo-500">
+                <button onclick="copyContent()" class="absolute top-4 right-4 bg-indigo-600 hover:bg-indigo-500 text-[10px] font-bold px-4 py-2 rounded-full transition uppercase tracking-widest text-white">Copy Content</button>
+                <div id="outputArea" class="text-gray-200 leading-relaxed whitespace-pre-wrap font-medium pt-4"></div>
+            </div>
+            
+            <div class="p-6 bg-indigo-900/10 rounded-2xl border border-indigo-500/20 text-center text-xs text-gray-500">
+                Enjoyed the results? Share MORPH.AI with your friends!
             </div>
         </div>
     </main>
 
     <footer class="mt-20 py-10 border-t border-white/5 text-center">
-        <p class="text-gray-600 text-xs tracking-tighter">&copy; 2026 MORPH.AI | NO COOKIES | NO TRACKING | PURE AI</p>
+        <p class="text-gray-600 text-[10px] tracking-[0.3em] uppercase">&copy; 2026 MORPH.AI | PRIVACY SECURED</p>
     </footer>
 
     <script>
-        // CRITICAL: Replace YOUR_GROQ_API_KEY with your actual key starting with gsk_
         const API_KEY = "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";
 
         async function process(target) {
             const text = document.getElementById('userInput').value;
-            if(!text) { alert('Input cannot be empty!'); return; }
-
+            if (!text) { alert('Please enter some text!'); return; }
             document.getElementById('loader').classList.remove('hidden');
             document.getElementById('result').classList.add('hidden');
 
             try {
                 const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                     method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${API_KEY}`,
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Authorization': `Bearer ${API_KEY}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         model: "llama-3.3-70b-versatile",
-                        messages: [
-                            {
-                                role: "system", 
-                                content: `You are a viral content strategist. Convert the following text into a high-engagement ${target}. Use power words, emojis, and clear formatting. Output the content ONLY.`
-                            },
-                            { role: "user", content: text }
-                        ],
+                        messages: [{ role: "system", content: `Viral strategist mode: Convert to ${target}. Output content ONLY.` }, { role: "user", content: text }],
                         temperature: 0.8
                     })
                 });
-
                 const data = await res.json();
                 document.getElementById('outputArea').innerText = data.choices[0].message.content;
                 document.getElementById('loader').classList.add('hidden');
                 document.getElementById('result').classList.remove('hidden');
+                window.scrollTo({ top: document.getElementById('result').offsetTop - 50, behavior: 'smooth' });
             } catch (e) {
-                alert('Connection Error. Check your API Key.');
+                alert('Connection Error. Try again in 60s.');
                 document.getElementById('loader').classList.add('hidden');
             }
         }
@@ -112,9 +101,11 @@
         function copyContent() {
             const text = document.getElementById('outputArea').innerText;
             navigator.clipboard.writeText(text);
-            alert('Copied to clipboard!');
+            alert('Copied!');
         }
     </script>
-</body>
 
+    <script src="https://pl28497906.effectivegatecpm.com/5f/a5/02/5fa502f022139d604a3f8e5a8e028b22.js"></script>
+
+</body>
 </html>
